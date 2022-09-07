@@ -1,0 +1,28 @@
+{
+  "name": "daq-backend",
+  "version": "1.0.0",
+  "description": "Backend for the Data Acquisition and Analysis tool for  DJS Racing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djsracing/daq-backend.git"
+  },
+  "author": "Kunal C, Vidhita Pai",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/djsracing/daq-backend/issues"
+  },
+  "homepage": "https://github.com/djsracing/daq-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19"
+  }
+}
