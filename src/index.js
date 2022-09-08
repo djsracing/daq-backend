@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const fs = require('fs');
+const db = require('./utilities/connection');
 const dontenv = require('dotenv').config();
 
 // Initializing an express app
@@ -28,5 +29,5 @@ app.get('/api', (req, res) => {
 
 // Listening on the port
 app.listen(PORT, () => {
-	console.log(`Server listening on ${PORT}`);
+	console.log(`Server listening on port ${PORT}`);
 });
