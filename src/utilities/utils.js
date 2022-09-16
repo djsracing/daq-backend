@@ -1,4 +1,6 @@
 const crypto = require('crypto-js');
+const jwt = require('jsonwebtoken');
+const Auth = require('./../models/auth.schema');
 
 // Dynamic length code generation function
 const generateCode = (codeLength) => {
@@ -25,8 +27,43 @@ const decrypt = (data) => {
     return decryptDataObj;
 };
 
+
+const generateBearerToken = async (user) => {
+    const jwtToken = jwt.sign({
+        userId: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        department: user.department
+    }, process.env.JWT_SECRET, {
+        expiresIn: '24h',
+    });
+
+    const expireDate = new Date();
+    expireDate.setHours(expireDate.getHours() + 24);
+
+    await new Auth({
+        token: jwtToken,
+        user: {
+            id: user._id,
+            email: user.email,
+            role: user.role,
+            department: user.department
+        },
+        tokenType: 'BEARER',
+        expireAt: expireDate,
+        lastAccess: new Date()
+    }).save();
+
+    return {
+        jwtToken,
+        expireDate
+    };
+}
+
 module.exports = {
     generateCode,
     encrypt,
-    decrypt
+    decrypt,
+    generateBearerToken
 };

@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             enum: ['DV', 'VD'] // TODO
         },
+        isActivated: {
+            type: Boolean,
+            default: false
+        },
         isdeleted: {
             type: Boolean,
             default: false

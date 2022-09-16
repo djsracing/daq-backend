@@ -30,14 +30,6 @@ const authSchema = new mongoose.Schema(
         },
         lastAccess: {
             type: Date
-        },
-        clientIPAddress: {
-            type: String,
-            required: false
-        },
-        userAgent: {
-            type: String,
-            required: false
         }
     },
     { timestamps: true }
