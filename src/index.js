@@ -36,6 +36,17 @@ app.use(passport.session());
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Azure Verification API
+app.get('/.well-known/microsoft-identity-association.json', (req, res) => {
+	res.send({
+	  "associatedApplications": [
+		{
+		  "applicationId": "c8e44532-d51d-41b5-bf51-013e760721c2"
+		}
+	  ]
+	});
+});
+
 // Test API
 app.get('/api', (req, res) => {
 	res.status(200).json({
