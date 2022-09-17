@@ -76,16 +76,6 @@ const verifyInvitationCode = async (req, res) => {
             message: error.message
         });
     }
-};  
-
-const azureVerification = (req, res) => {
-    res.send({
-      "associatedApplications": [
-        {
-          "applicationId": "c8e44532-d51d-41b5-bf51-013e760721c2"
-        }
-      ]
-    });
 };
 
 module.exports = {

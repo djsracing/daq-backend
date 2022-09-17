@@ -19,6 +19,4 @@ router.get('/microsoft/fail', microsoftFailure);
 
 router.post('/verify/invitation-code', verifyInvitationCode);
 
-router.get('/.well-known/microsoft-identity-association.json', azureVerification);
-
 module.exports = router;
