@@ -81,6 +81,5 @@ const verifyInvitationCode = async (req, res) => {
 module.exports = {
     microsoftCallback,
     microsoftFailure,
-    verifyInvitationCode,
-    azureVerification
+    verifyInvitationCode
 }
