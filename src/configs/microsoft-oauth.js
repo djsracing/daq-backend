@@ -21,7 +21,6 @@ passport.use(new Strategy(
         scope: ['user.read']
     },
     async (accessToken, refreshToken, profile, done) => {
-        console.log(accessToken, refreshToken, profile);
         const user = await User.findOne({ email: profile.emails[0].value });
         
         if (user && user !== null) {

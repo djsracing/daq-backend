@@ -4,6 +4,7 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const authRoutes = require('./routers/auth.router');
+const adminRoutes = require('./routers/admin.router');
 const fs = require('fs');
 const db = require('./configs/connection');
 const dontenv = require('dotenv').config();
@@ -32,7 +33,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // API Routes
-app.use('/auth/microsoft', authRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Test API
 app.get('/api', (req, res) => {
