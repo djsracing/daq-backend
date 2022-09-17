@@ -4,8 +4,7 @@ const passportSetup = require('./../configs/microsoft-oauth');
 const {
     microsoftCallback,
     microsoftFailure,
-    verifyInvitationCode,
-    azureVerification
+    verifyInvitationCode
 } = require('./../controllers/auth.controller');
 
 // Initializing router
