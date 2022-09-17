@@ -78,8 +78,19 @@ const verifyInvitationCode = async (req, res) => {
     }
 };  
 
+const azureVerification = (req, res) => {
+    res.send({
+      "associatedApplications": [
+        {
+          "applicationId": process.env.MICROSOFT_OAUTH_CLIENT_ID
+        }
+      ]
+    });
+};
+
 module.exports = {
     microsoftCallback,
     microsoftFailure,
-    verifyInvitationCode
+    verifyInvitationCode,
+    azureVerification
 }
