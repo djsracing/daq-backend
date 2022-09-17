@@ -82,7 +82,7 @@ const azureVerification = (req, res) => {
     res.send({
       "associatedApplications": [
         {
-          "applicationId": process.env.MICROSOFT_OAUTH_CLIENT_ID
+          "applicationId": "c8e44532-d51d-41b5-bf51-013e760721c2"
         }
       ]
     });
