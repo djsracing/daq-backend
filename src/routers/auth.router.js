@@ -4,7 +4,8 @@ const passportSetup = require('./../configs/microsoft-oauth');
 const {
     microsoftCallback,
     microsoftFailure,
-    verifyInvitationCode
+    verifyInvitationCode,
+    azureVerification
 } = require('./../controllers/auth.controller');
 
 // Initializing router
@@ -17,5 +18,7 @@ router.get('/microsoft/callback', passport.authenticate('microsoft', { failureRe
 router.get('/microsoft/fail', microsoftFailure);
 
 router.post('/verify/invitation-code', verifyInvitationCode);
+
+router.get('/.well-known/microsoft-identity-association.json', azureVerification);
 
 module.exports = router;
