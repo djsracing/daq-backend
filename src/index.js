@@ -41,7 +41,7 @@ app.get('/.well-known/microsoft-identity-association.json', (req, res) => {
 	res.send({
 	  "associatedApplications": [
 		{
-		  "applicationId": "c8e44532-d51d-41b5-bf51-013e760721c2"
+		  "applicationId": process.env.MICROSOFT_OAUTH_CLIENT_ID
 		}
 	  ]
 	});
