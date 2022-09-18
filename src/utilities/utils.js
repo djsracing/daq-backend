@@ -34,11 +34,14 @@ const generateBearerToken = async (user) => {
         userId: user._id,
         name: user.name,
         email: user.email,
-        role: user.role,
-        department: user.department
+        role: user.role ? user.role : null,
+        department: user.department ? user.department : null,
+        isActivated: user.isActivated
     }, process.env.JWT_SECRET, {
         expiresIn: '24h',
     });
+
+    console.log(jwtToken);
 
     const expireDate = new Date();
     expireDate.setHours(expireDate.getHours() + 24);

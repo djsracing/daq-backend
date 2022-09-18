@@ -38,36 +38,43 @@ const verifyInvitationCode = async (req, res) => {
                 message: 'User not found'
             });
         } else {
-            const auth = await Auth.findOne({ token: decryptedData.token });
-            if (!auth) {
+            if (user.isActivated === true) {
                 res.status(400).json({
-                    message: 'Invalid invitation code'
+                    message: 'Account already activated!'
                 });
             } else {
-                if (user.email !== auth.user.email) {
+                const auth = await Auth.findOne({ token: decryptedData.token });
+
+                if (!auth) {
                     res.status(400).json({
-                        message: 'Invalid invitaion code'
+                        message: 'Invalid invitation code'
                     });
                 } else {
-                    user.role = auth.user.role;
-                    user.department = auth.user.department;
-                    user.isActivated = true;
-                    await user.save();
+                    if (user.email !== auth.user.email) {
+                        res.status(400).json({
+                            message: 'Invalid invitaion code'
+                        });
+                    } else {
+                        user.role = auth.user.role;
+                        user.department = auth.user.department;
+                        user.isActivated = true;
+                        await user.save();
 
-                    const { token, expireDate } = await generateBearerToken(user);
+                        const { jwtToken, expireDate } = await generateBearerToken(user);
 
-                    const dataObj = {
-                        user: user,
-                        token: token,
-                        expireDate: expireDate
-                    };
+                        const dataObj = {
+                            user: user,
+                            token: jwtToken,
+                            expireDate: expireDate
+                        };
 
-                    const encryptedData = encrypt(dataObj);
+                        const encryptedData = encrypt(dataObj);
 
-                    res.status(200).json({
-                        message: 'User account activated',
-                        data: encryptedData
-                    });
+                        res.status(200).json({
+                            message: 'User account activated',
+                            data: encryptedData
+                        });
+                    }
                 }
             }
         }
