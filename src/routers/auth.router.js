@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('./../middlewares/authentication.middleware');
 const passport = require('passport');
 const passportSetup = require('./../configs/microsoft-oauth');  
 const {
@@ -16,6 +17,6 @@ router.get('/microsoft/callback', passport.authenticate('microsoft', { failureRe
 
 router.get('/microsoft/fail', microsoftFailure);
 
-router.post('/verify/invitation-code', verifyInvitationCode);
+router.post('/verify/invitation-code', [auth.verifyJwt, auth.accountActivatedFalse], verifyInvitationCode);
 
 module.exports = router;

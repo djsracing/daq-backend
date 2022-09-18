@@ -24,11 +24,11 @@ passport.use(new Strategy(
         const user = await User.findOne({ email: profile.emails[0].value });
         
         if (user && user !== null) {
+            const  { token, expireDate } = generateBearerToken(user);
             if (user.isActivated === true) {
-                const  { token, expireDate } = generateBearerToken(user);
-                return done(null, { ...user.toObject(), isActivated: true, token: token });
+                return done(null, { ...user.toObject(), isActivated: true, token: token, expireDate: expireDate });
             } else {
-                return done(null, { ...user.toObject(), isActivated: false });
+                return done(null, { ...user.toObject(), isActivated: false, token: token, expireDate: expireDate });
             }
         }
         else {
@@ -40,7 +40,9 @@ passport.use(new Strategy(
                 }
             );
             await user.save();
-            return done(null, { ...user?.toObject(), isActivated: false });
+
+            const  { token, expireDate } = generateBearerToken(user);
+            return done(null, { ...user?.toObject(), isActivated: false, token: token, expireDate: expireDate });
         }
     }
 ));
