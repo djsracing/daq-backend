@@ -27,11 +27,7 @@ const auth = {
                             });
                         } else {
                             req.token = token;
-                            req.userId = jwtVerify['id'];
-                            req.email = jwtVerify['email'];
-                            req.role = jwtVerify['role'];
-                            req.department = jwtVerify['department'];
-                            req.isActivated = jwtVerify['isActivated'];
+                            req.user = jwtVerify;
 
                             next();
                         } 
@@ -51,7 +47,7 @@ const auth = {
 
     accountActivatedTrue: (req, res, next) => {
         try {
-            if (req.isActivated === true) {
+            if (req.user.isActivated === true) {
                 next();
             } else {
                 res.status(401).json({
@@ -67,7 +63,7 @@ const auth = {
 
     accountActivatedFalse: (req, res, next) => {
         try {
-            if (req.isActivated === false) {
+            if (req.user.isActivated === false) {
                 next();
             } else {
                 res.status(401).json({

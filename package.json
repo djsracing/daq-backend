@@ -1,6 +1,6 @@
 {
   "name": "daq-backend",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Backend for the Data Acquisition and Analysis tool for  DJS Racing",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
+    "csvtojson": "^2.0.10",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
@@ -31,6 +32,8 @@
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19",
     "passport": "^0.6.0",
-    "passport-microsoft": "^1.0.0"
+    "passport-microsoft": "^1.0.0",
+    "request": "^2.88.2",
+    "sharp": "^0.31.0"
   }
 }
