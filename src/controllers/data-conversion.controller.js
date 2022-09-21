@@ -1,18 +1,19 @@
 const Upload = require('./../models/upload.schema');
-const User = require('./../models/user.schema');
 const csv = require('csvtojson');
-const request = require('request');
-const sharp = require('sharp');
 const fs = require('fs');
 const { encrypt, decrypt } = require('./../utilities/utils');
 
 const convertCsvToJson = async (req, res) => {
     try {
+        // Reading uploaded file as buffer
         const buffer = fs.readFileSync(req.file.path);
-        csv()
+        let uploadObj;
+
+        // Converting CSV file to JSON
+        await csv()
             .fromFile(req.file.path)
             .then(async (jsonObj) => {
-                const uploadObj = new Upload({
+                uploadObj = new Upload({
                     user: {
                         id: req.user.userId,
                         name: req.user.name,
@@ -28,15 +29,15 @@ const convertCsvToJson = async (req, res) => {
 
         // Deleting uploaded file from server
         fs.unlinkSync(req.file.path);
-        // fs.unlink(req.file.path, (error) => {
-        //     if (error) {
-        //         throw error;
-        //     }
-        //     console.log('file was deleted');
-        // });
+
+        const dataObj = {
+            sensorData: uploadObj
+        };
+        const encryptedData = encrypt(dataObj);
 
         res.status(200).json({
-            message: 'Converted to JSON & stored successfully!'
+            message: 'Sensor data uploaded successfully',
+            data: encryptedData
         });
     } catch (error) {
         res.status(400).json({

@@ -15,7 +15,6 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'text/csv') {
         cb(null, true);
     } else {
-        console.log(file.mimetype);
         cb(null, false);
     }
 };
