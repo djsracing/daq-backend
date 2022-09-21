@@ -5,6 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const authRoutes = require('./routers/auth.router');
 const adminRoutes = require('./routers/admin.router');
+const conversionRoutes = require('./routers/data-conversion.router');
 const fs = require('fs');
 const db = require('./configs/connection');
 const dontenv = require('dotenv').config();
@@ -35,6 +36,9 @@ app.use(passport.session());
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/conversion', conversionRoutes);
+const testRoutes = require('./routers/test.router');
+app.use('/api/test', testRoutes);
 
 // Azure Verification API
 app.get('/.well-known/microsoft-identity-association.json', (req, res) => {
