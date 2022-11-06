@@ -37,8 +37,6 @@ app.use(passport.session());
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/conversion', conversionRoutes);
-const testRoutes = require('./routers/test.router');
-app.use('/api/test', testRoutes);
 
 // Azure Verification API
 app.get('/.well-known/microsoft-identity-association.json', (req, res) => {
