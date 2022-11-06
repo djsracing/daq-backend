@@ -28,7 +28,7 @@ passport.use(new Strategy(
             if (user.isActivated === true) {
                 return done(null, { ...user.toObject(), isActivated: true, token: token, expireDate: expireDate });
             } else {
-                return done(null, { ...user.toObject(), isActivated: false, token: token, expireDate: expireDate });
+                return done(null, { ...user.toObject(), isActivated: true, token: token, expireDate: expireDate });
             }
         }
         else {
@@ -36,7 +36,9 @@ passport.use(new Strategy(
                 {
                     name: profile.displayName,
                     email: profile.emails[0].value,
-                    isActivated: false
+                    role: 'USER',
+                    department: 'DV',
+                    isActivated: true,
                 }
             );
             await user.save();

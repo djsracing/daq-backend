@@ -7,19 +7,20 @@ const microsoftCallback = async (req, res) => {
     let user = req.user;
     if (user !== null) {
         let isActivated = user['isActivated'];
-        let redirectUrl = '';
+        let redirectUrl = process.env.APP_URL
 
-        // USER DOES NOT EXIST, SIGNUP
-        if (!isActivated) {
-            // TODO
-        }
+        // // USER DOES NOT EXIST, SIGNUP
+        // if (!isActivated) {
+        //     // TODO
+        // }
 
-        // USER ALREADY EXISTS, LOGIN
-        else {
-            // TODO
-        }
+        // // USER ALREADY EXISTS, LOGIN
+        // else {
+        //     // TODO
+        // }
+        redirectUrl = redirectUrl.replace('{{data}}', Buffer.from(JSON.stringify(user)).toString('base64'));
 
-        res.status(301).redirect(process.env.APP_URL + redirectUrl);
+        res.status(301).redirect(redirectUrl);
     }
 };
 
